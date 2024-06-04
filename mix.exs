@@ -1,0 +1,33 @@
+defmodule TodoCache.MixProject do
+  use Mix.Project
+
+  def project do
+    [
+      app: :todo,
+      version: "0.1.0",
+      elixir: "~> 1.16",
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
+  end
+
+  def application do
+    [
+      extra_applications: [:logger, :wx, :observer, :runtime_tools],
+      mod: {Todo.Application, []}
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [release: :prod]
+    ]
+  end
+
+  defp deps do
+    [
+      {:poolboy, "~> 1.5"},
+      {:plug_cowboy, "~> 2.0"}
+    ]
+  end
+end
